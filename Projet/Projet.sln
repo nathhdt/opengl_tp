@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.421
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Projet", "Projet.vcxproj", "{CCE73022-34F9-4CC8-B5F3-FB7696FA7795}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Image", "..\Image\Image.vcxitems", "{E4E79D29-6D36-4F85-9AF4-1500EF62C358}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		..\Image\Image.vcxitems*{cce73022-34f9-4cc8-b5f3-fb7696fa7795}*SharedItemsImports = 4
+		..\Image\Image.vcxitems*{e4e79d29-6d36-4f85-9af4-1500ef62c358}*SharedItemsImports = 9
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CCE73022-34F9-4CC8-B5F3-FB7696FA7795}.Debug|x64.ActiveCfg = Debug|x64
+		{CCE73022-34F9-4CC8-B5F3-FB7696FA7795}.Debug|x64.Build.0 = Debug|x64
+		{CCE73022-34F9-4CC8-B5F3-FB7696FA7795}.Debug|x86.ActiveCfg = Debug|Win32
+		{CCE73022-34F9-4CC8-B5F3-FB7696FA7795}.Debug|x86.Build.0 = Debug|Win32
+		{CCE73022-34F9-4CC8-B5F3-FB7696FA7795}.Release|x64.ActiveCfg = Release|x64
+		{CCE73022-34F9-4CC8-B5F3-FB7696FA7795}.Release|x64.Build.0 = Release|x64
+		{CCE73022-34F9-4CC8-B5F3-FB7696FA7795}.Release|x86.ActiveCfg = Release|Win32
+		{CCE73022-34F9-4CC8-B5F3-FB7696FA7795}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {70560364-A131-4C1C-B307-723A4A9C3218}
+	EndGlobalSection
+EndGlobal
