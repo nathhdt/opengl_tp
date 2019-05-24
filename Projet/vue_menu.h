@@ -4,6 +4,8 @@
 #include "controleur.h"
 
 
+using namespace std;
+
 class Vue_Menu : public Vue
 {
 private:
@@ -13,5 +15,6 @@ public:
 	Vue_Menu(Controleur& _controleur);
 	virtual void notify();
 	virtual void display();
-	void chargerImage();
+	string selectionFichier() const;
+	string selectionEnregistrement() const;
 };

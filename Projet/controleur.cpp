@@ -1,10 +1,11 @@
 #include "controleur.h"
 
 
+using namespace std;
+
 Controleur::Controleur()
-	: Sujet(), ecran(0)
+	: Sujet(), ecran(0), objetImage()
 {
-	//TODO
 }
 
 void Controleur::modifierEcran(const int& value)
@@ -15,26 +16,37 @@ void Controleur::modifierEcran(const int& value)
 	notify();
 }
 
-int Controleur::ecranActuel()
+int Controleur::ecranActuel() const
 {
 	return ecran;
 }
 
-//const Complaints& Controleur::getComplaints()
-//{
-//	return complaints;
-//}
+void Controleur::chargerImage(string _chemin)
+{
+	objetImage.charger(_chemin);
+}
 
-//void Controleur::addComplaint(const Complaint& complaint)
-//{
-//	complaints.add(complaint);
-//
-	//TODO
-//	modifierEcran(0);
-//}
+void Controleur::sauvegarderImage(string _chemin)
+{
+	objetImage.sauvegarder(_chemin);
+}
 
-//void Controleur::removeComplaint(const int& index)
-//{
-//	complaints.remove(index);
-//	notify();
-//}
+string Controleur::nomFichier()
+{
+	if (objetImage.nom() == "")
+	{
+		return "aucune";
+	}
+	else
+	{
+		char sep = '/';
+		#ifdef _WIN32
+		sep = '\\';
+		#endif
+		size_t i = objetImage.nom().rfind(sep, objetImage.nom().length());
+		if (i != string::npos) {
+			return(objetImage.nom().substr(i + 1, objetImage.nom().length() - i));
+		}
+		return "?";
+	}
+}

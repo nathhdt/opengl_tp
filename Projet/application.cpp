@@ -2,7 +2,7 @@
 
 
 Application::Application()
-	: appControleur(), appVueMenu(appControleur), appVueCharger(appControleur), appVueMedian(appControleur), appVueGaussien(appControleur), appVueGradient(appControleur), appVueDilatation(appControleur), appVueErosion(appControleur), appVueDetectionContours(appControleur), appVueSeuillage(appControleur), appVueSegmentation(appControleur)
+	: appControleur(), appVueMenu(appControleur), appVueMedian(appControleur), appVueGaussien(appControleur), appVueGradient(appControleur), appVueDilatation(appControleur), appVueErosion(appControleur), appVueDetectionContours(appControleur), appVueSeuillage(appControleur), appVueSegmentation(appControleur)
 {
 }
 

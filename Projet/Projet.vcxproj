@@ -85,7 +85,12 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Program Files\OpenCV\opencv\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>C:\Program Files\OpenCV\opencv\build\x64\vc14\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opencv_world410d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -122,7 +127,6 @@
     <ClCompile Include="observateur.cpp" />
     <ClCompile Include="sujet.cpp" />
     <ClCompile Include="vue.cpp" />
-    <ClCompile Include="vue_charger.cpp" />
     <ClCompile Include="vue_detectioncontours.cpp" />
     <ClCompile Include="vue_dilatation.cpp" />
     <ClCompile Include="vue_erosion.cpp" />
@@ -139,7 +143,6 @@
     <ClInclude Include="observateur.h" />
     <ClInclude Include="sujet.h" />
     <ClInclude Include="vue.h" />
-    <ClInclude Include="vue_charger.h" />
     <ClInclude Include="vue_detectioncontours.h" />
     <ClInclude Include="vue_dilatation.h" />
     <ClInclude Include="vue_erosion.h" />

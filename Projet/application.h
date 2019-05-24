@@ -1,7 +1,6 @@
 #pragma once
 #include "controleur.h"
 #include "vue_menu.h"
-#include "vue_charger.h"
 #include "vue_median.h"
 #include "vue_gaussien.h"
 #include "vue_gradient.h"
@@ -17,7 +16,6 @@ class Application
 private:
 	Controleur appControleur;
 	Vue_Menu appVueMenu;
-	Vue_Charger appVueCharger;
 	Vue_Median appVueMedian;
 	Vue_Gaussien appVueGaussien;
 	Vue_Gradient appVueGradient;
