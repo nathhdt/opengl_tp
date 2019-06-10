@@ -34,6 +34,21 @@ void Controleur::sauvegarderImage(string _chemin)
 	objetImage.sauvegarder(_chemin);
 }
 
+void Controleur::filtreMedian(int _intensite)
+{
+	objetImage.filtreMedian(_intensite);
+}
+
+void Controleur::filtreGaussien(int _intensite)
+{
+	objetImage.filtreGaussien(_intensite);
+}
+
+void Controleur::imageTravail()
+{
+	objetImage.travail();
+}
+
 string Controleur::nomFichier()
 {
 	//On récupère le chemin d'accès de l'image par le biais de son objet

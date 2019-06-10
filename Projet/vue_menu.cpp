@@ -1,6 +1,7 @@
 #include "vue_menu.h"
 #include <conio.h>
 #include <iostream>
+#include <thread>
 #include <Windows.h>
 
 
@@ -165,6 +166,17 @@ void Vue_Menu::display()
 				cout << "\t11. Quitter" << endl << endl << "\t";
 			}
 
+			//Affichage image en cours
+
+
+			thread affichage(&Vue_Menu::afficherImage, this);
+
+			affichage.detach();
+
+
+
+
+
 			//Détection de l'appui de touches
 			while (killer == 0)
 			{
@@ -204,6 +216,7 @@ void Vue_Menu::display()
 					break;
 				}
 			}
+			//affichage.join();
 		}
 		else //Si aucun fichier n'a été chargé, le menu est restreint
 		{
@@ -347,4 +360,9 @@ string Vue_Menu::selectionEnregistrement() const
 	//Conversion du tableau avec le chemin d'accès en string
 	string chemin(cheminImage);
 	return chemin; //Retourne le chemin complet de l'image à sauvegarder
+}
+
+void Vue_Menu::afficherImage()
+{
+	appControleur.imageTravail();
 }

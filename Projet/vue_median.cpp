@@ -52,7 +52,8 @@ void Vue_Median::display()
 		{
 			switch ((touche = _getch())) {
 			case 13: //ENTREE
-				//TO-DO: application filtre
+				cout << endl << endl << "\t    ..." << endl;
+				appControleur.filtreMedian(parametre);
 				appControleur.modifierEcran(0);
 				fini = 1;
 				killer = 1;

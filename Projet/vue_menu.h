@@ -17,4 +17,5 @@ public:
 	virtual void display();
 	string selectionFichier() const;
 	string selectionEnregistrement() const;
+	void afficherImage();
 };

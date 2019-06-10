@@ -16,5 +16,8 @@ public:
 	int ecranActuel() const;
 	void chargerImage(string _chemin);
 	void sauvegarderImage(string _chemin);
+	void filtreMedian(int _intensite);
+	void filtreGaussien(int _intensite);
+	void imageTravail();
 	string nomFichier();
 };

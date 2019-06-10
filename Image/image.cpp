@@ -31,14 +31,26 @@ void image::charger(string _chemin)
 	}
 }
 
-//INFO: _intensite doit etre supérieur à 1 et être impair (1 = 10%, 5 = 50%.. on va jusqu'à 21 = 210%)
 void image::filtreMedian(int _intensite)
 {
+	//Conversion intensité
+	int niveau = (_intensite*2.5);
+	if ((niveau % 2) == 0) { niveau++; }
+
+	//Travail
+	Mat& img = imageTravaillee;
+	medianBlur(img, imageTravaillee, niveau);
 }
 
-//INFO: sigma à 0, le reste pareil que le filtre médian
 void image::filtreGaussien(int _intensite)
 {
+	//Conversion intensité
+	int niveau = (_intensite*2.5);
+	if ((niveau % 2) == 0) { niveau++; }
+
+	//Travail
+	Mat& img = imageTravaillee;
+	GaussianBlur(img, imageTravaillee, Size(niveau, niveau), (0.0), 0);
 }
 
 void image::sauvegarder(string _chemin)
@@ -59,6 +71,44 @@ string image::nom()
 	return chemin;
 }
 
+void image::travail()
+{
+	string nomImage = "";
+
+	//On récupère le chemin d'accès de l'image (pour le titre de la fenêtre)
+	if (nom() == "")
+	{
+		nomImage = "?";
+	}
+	else
+	{
+		//Séparateur pour chemin d'accès (un "\"), double-anti-slash pour que le compilateur comprenne que c'est un seul anti-slash
+		char separateur = '\\';
+		//Découpe de la string & renvoie la position du premier caractère du nom de fichier qu'on cherche dans un entier non-signé
+		size_t decoupe = nom().rfind(separateur, nom().length());
+
+		//Si il trouve bien le nom de fichier
+		//string::npos = -1 (pas de match)
+		if (decoupe != string::npos) {
+			nomImage = nom().substr(decoupe + 1, nom().length() - decoupe);
+		}
+		else
+		{
+			//S'il ne trouve pas le nom de fichier (normalement quasi-impossible)
+			nomImage = "?";
+		}
+	}
+	
+	//Impossible de faire un resize de la fenêtre par l'utilisateur sans Qt (fais chier)
+	namedWindow(nomImage, WINDOW_AUTOSIZE);
+	imshow(nomImage, imageTravaillee);
+
+	//Empêche la fenêtre de se fermer
+	while (true)
+	{
+		waitKey(0);
+	}
+}
 
 image::~image()
 {

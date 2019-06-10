@@ -17,5 +17,6 @@ public:
 	void filtreGaussien(int _intensite);
 	void sauvegarder(string _chemin);
 	string nom();
+	void travail();
 	~image();
 };

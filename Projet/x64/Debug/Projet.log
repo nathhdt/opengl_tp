@@ -1,5 +1,4 @@
-﻿  vue_median.cpp
-  vue_seuillage.cpp
-  Génération de code en cours...
-  LINK : C:\Users\Nathan\Documents\GitHub\esirem_tp\Projet\x64\Debug\Projet.exe introuvable ou non gÚnÚrÚ par la derniÞre Údition de liens incrÚmentielleá; Údition de liens complÞte en cours
+﻿  image.cpp
+c:\users\nathan\documents\github\esirem_tp\image\image.cpp(37): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
+c:\users\nathan\documents\github\esirem_tp\image\image.cpp(48): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
   Projet.vcxproj -> C:\Users\Nathan\Documents\GitHub\esirem_tp\Projet\x64\Debug\Projet.exe
