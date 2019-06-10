@@ -20,6 +20,7 @@ public:
 	void filtreGaussien(int _intensite);
 	void calculGradient(int _luminosite);
 	void filtreDilatation(int _niveau);
+	void filtreErosion(int _niveau);
 	void imageTravail();
 	string nomFichier();
 };

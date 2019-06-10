@@ -54,6 +54,11 @@ void Controleur::filtreDilatation(int _niveau)
 	objetImage.dilatation(_niveau);
 }
 
+void Controleur::filtreErosion(int _niveau)
+{
+	objetImage.erosion(_niveau);
+}
+
 void Controleur::imageTravail()
 {
 	objetImage.travail();

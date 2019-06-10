@@ -86,6 +86,21 @@ void image::dilatation(int _niveau)
 	imageTravaillee = dilated;
 }
 
+void image::erosion(int _niveau)
+{
+	//Conversion niveau
+	_niveau = (_niveau / 3);
+	if ((_niveau % 2 == 0)) { _niveau++; }
+
+	//Travail
+	Mat& img = imageTravaillee;
+	Mat eroded;
+	int forme = MORPH_ELLIPSE;
+	Mat structure = getStructuringElement(forme, Size(_niveau, _niveau), Point(0, 0));
+	erode(img, eroded, structure);
+	imageTravaillee = eroded;
+}
+
 void image::sauvegarder(string _chemin)
 {
 	if (_chemin == "PAS_DE_FICHIER")

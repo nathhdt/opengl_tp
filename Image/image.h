@@ -17,6 +17,7 @@ public:
 	void filtreGaussien(int _intensite);
 	void gradient(int _luminosite);
 	void dilatation(int _niveau);
+	void erosion(int _niveau);
 	void sauvegarder(string _chemin);
 	string nom();
 	void travail();
