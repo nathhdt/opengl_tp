@@ -59,6 +59,11 @@ void Controleur::filtreErosion(int _niveau)
 	objetImage.erosion(_niveau);
 }
 
+void Controleur::filtreCanny(int _niveau)
+{
+	objetImage.canny(_niveau);
+}
+
 void Controleur::imageTravail()
 {
 	objetImage.travail();

@@ -101,6 +101,21 @@ void image::erosion(int _niveau)
 	imageTravaillee = eroded;
 }
 
+void image::canny(int _niveau)
+{
+	//Conversion niveau
+	int blurlevel = ((15 + (10 / _niveau)) - (_niveau / 4));
+	if ((blurlevel % 2) == 0) { blurlevel++; }
+
+	//Travail
+	Mat& img = imageTravaillee;
+	Mat gray_image, canny_result, blured_image;
+	cvtColor(img, gray_image, cv::COLOR_BGR2GRAY);
+	blur(gray_image, blured_image, Size(blurlevel, blurlevel));
+	Canny(blured_image, canny_result, 0, (40 - _niveau), 3, false);
+	imageTravaillee = canny_result;
+}
+
 void image::sauvegarder(string _chemin)
 {
 	if (_chemin == "PAS_DE_FICHIER")
