@@ -1,6 +1,8 @@
 #include "application.h"
 
 
+using namespace std;
+
 int main()
 {
 	Application application;
@@ -8,10 +10,11 @@ int main()
 	{
 		application.demarrer();
 	}
-	catch (const std::string err)
+	catch (const string erreur)
 	{
 		//Une erreur est throw pendant le code si on veut quitter, on quitte proprement par le main (pas de std::exit)
-		if (err == "EXITAPP") //Throw dans vue_menu.cpp
+		//On détruit aussi tous les objets de manière propre et efficace
+		if (erreur == "EXIT_APP") //Throw dans vue_menu.cpp
 		{
 			return EXIT_SUCCESS;
 		}

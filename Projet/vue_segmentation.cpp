@@ -13,7 +13,9 @@ Vue_Segmentation::Vue_Segmentation(Controleur& _controleur)
 void Vue_Segmentation::notify()
 {
 	if (appControleur.ecranActuel() == 9)
+	{
 		display();
+	}
 }
 
 void Vue_Segmentation::display()

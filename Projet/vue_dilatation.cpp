@@ -13,7 +13,9 @@ Vue_Dilatation::Vue_Dilatation(Controleur& _controleur)
 void Vue_Dilatation::notify()
 {
 	if (appControleur.ecranActuel() == 5)
+	{
 		display();
+	}
 }
 
 void Vue_Dilatation::display()

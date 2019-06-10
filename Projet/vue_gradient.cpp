@@ -13,7 +13,9 @@ Vue_Gradient::Vue_Gradient(Controleur& _controleur)
 void Vue_Gradient::notify()
 {
 	if (appControleur.ecranActuel() == 4)
+	{
 		display();
+	}
 }
 
 void Vue_Gradient::display()

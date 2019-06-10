@@ -13,7 +13,9 @@ Vue_DetectionContours::Vue_DetectionContours(Controleur& _controleur)
 void Vue_DetectionContours::notify()
 {
 	if (appControleur.ecranActuel() == 7)
+	{
 		display();
+	}
 }
 
 void Vue_DetectionContours::display()

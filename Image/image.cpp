@@ -36,7 +36,7 @@ void image::filtreMedian(int _intensite)
 {
 }
 
-//INFO: sigma à 0, sinon pareil que le filtre médian
+//INFO: sigma à 0, le reste pareil que le filtre médian
 void image::filtreGaussien(int _intensite)
 {
 }

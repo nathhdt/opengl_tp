@@ -19,4 +19,3 @@ public:
 	string nom();
 	~image();
 };
-

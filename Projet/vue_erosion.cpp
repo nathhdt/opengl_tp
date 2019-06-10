@@ -13,7 +13,9 @@ Vue_Erosion::Vue_Erosion(Controleur& _controleur)
 void Vue_Erosion::notify()
 {
 	if (appControleur.ecranActuel() == 6)
+	{
 		display();
+	}
 }
 
 void Vue_Erosion::display()

@@ -15,7 +15,9 @@ Vue_Menu::Vue_Menu(Controleur& _controleur)
 void Vue_Menu::notify()
 {
 	if (appControleur.ecranActuel() == 0)
+	{
 		display();
+	}
 }
 
 void Vue_Menu::display()
@@ -182,7 +184,7 @@ void Vue_Menu::display()
 					}
 					else
 					{
-						throw string("EXITAPP");
+						throw string("EXIT_APP");
 					}
 					killer = 1;
 					break;
@@ -264,7 +266,7 @@ void Vue_Menu::display()
 					}
 					else
 					{
-						throw string("EXITAPP");
+						throw string("EXIT_APP");
 					}
 					killer = 1;
 					break;

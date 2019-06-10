@@ -15,13 +15,15 @@ Vue_Median::Vue_Median(Controleur& _controleur)
 void Vue_Median::notify()
 {
 	if (appControleur.ecranActuel() == 2)
+	{
 		display();
+	}
 }
 
 void Vue_Median::display()
 {
 	clear();
-	int parametre = 0;
+	int parametre = 1;
 	int fini = 0;
 	while (fini == 0)
 	{
@@ -30,13 +32,14 @@ void Vue_Median::display()
 
 		//Affichage ProgressBar
 		cout << "\tIntensite: " << endl << "\t\t";
-		cout << endl << "                                                                                                                      " << endl << "\t\t";
+		cout << endl << "                                                     |" << endl << "\t\t";
 		coord.X = 12;
 		coord.Y = 4;
 		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
-		
+
+		cout << "|";
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 112);
-		for (int i = 0; i <= parametre; i++)
+		for (int i = 0; i <= parametre - 1; i++)
 		{
 			cout << " ";
 		}
@@ -55,7 +58,7 @@ void Vue_Median::display()
 				killer = 1;
 				break;
 			case 75: //GAUCHE
-				if (parametre != 0)
+				if (parametre != 1)
 				{
 					parametre--;
 				}

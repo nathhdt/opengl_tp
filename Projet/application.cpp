@@ -8,5 +8,6 @@ Application::Application()
 
 void Application::demarrer()
 {
+	//Premier notify() au controleur pour afficher le menu principal
 	appControleur.notify();
 }

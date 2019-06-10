@@ -10,8 +10,11 @@ Controleur::Controleur()
 
 void Controleur::modifierEcran(const int& value)
 {
+	//On vérifie que la valeur est bien comprise dans les possibilités de menus à afficher
 	if (value >= 0 && value <= 9)
+	{
 		ecran = value;
+	}
 
 	notify();
 }
@@ -33,20 +36,24 @@ void Controleur::sauvegarderImage(string _chemin)
 
 string Controleur::nomFichier()
 {
+	//On récupère le chemin d'accès de l'image par le biais de son objet
 	if (objetImage.nom() == "")
 	{
 		return "aucune";
 	}
 	else
 	{
-		char sep = '/';
-		#ifdef _WIN32
-		sep = '\\';
-		#endif
-		size_t i = objetImage.nom().rfind(sep, objetImage.nom().length());
-		if (i != string::npos) {
-			return(objetImage.nom().substr(i + 1, objetImage.nom().length() - i));
+		//Séparateur pour chemin d'accès (un "\"), double-anti-slash pour que le compilateur comprenne que c'est un seul anti-slash
+		char separateur = '\\';
+		//Découpe de la string & renvoie la position du premier caractère du nom de fichier qu'on cherche dans un entier non-signé
+		size_t decoupe = objetImage.nom().rfind(separateur, objetImage.nom().length());
+
+		//Si il trouve bien le nom de fichier
+		//string::npos = -1 (pas de match)
+		if (decoupe != string::npos) {
+			return(objetImage.nom().substr(decoupe + 1, objetImage.nom().length() - decoupe));
 		}
+		//S'il ne trouve pas le nom de fichier (normalement quasi-impossible)
 		return "?";
 	}
 }

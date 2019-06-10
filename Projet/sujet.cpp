@@ -12,8 +12,9 @@ void Sujet::ajouterObservateur(Observateur* observateur)
 
 void Sujet::notify()
 {
-	for (int iObserver = 0; iObserver < observateurs.size(); ++iObserver)
+	//notify() pour tous les sujets
+	for (int i = 0; i < observateurs.size(); i++)
 	{
-		observateurs[iObserver]->notify();
+		observateurs[i]->notify();
 	}
 }

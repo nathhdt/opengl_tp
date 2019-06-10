@@ -3,17 +3,21 @@
 #include <iostream>
 
 
-Vue::Vue(const std::string& _titre)
-	:titre(_titre)
+using namespace std;
+
+Vue::Vue(const string& _titre)
+	: titre(_titre)
 {
 }
 
 void Vue::clear() const
 {
-	system("CLS");
+	//Permet de clear l'écran (vider la console)
+	system("cls");
 }
 
 void Vue::afficher() const
 {
-	std::cout << titre << std::endl << std::endl;
+	//Affiche le titre du menu
+	cout << titre << endl << endl;
 }
