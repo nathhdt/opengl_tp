@@ -31,7 +31,7 @@ void Vue_Seuillage::display()
 		COORD coord;
 
 		//Affichage ProgressBar
-		cout << "\tIntensite: " << endl << "\t\t";
+		cout << "\tNiveau: " << endl << "\t\t";
 		cout << endl << "                                                     |" << endl << "\t\t";
 		coord.X = 12;
 		coord.Y = 4;
@@ -52,7 +52,8 @@ void Vue_Seuillage::display()
 		{
 			switch ((touche = _getch())) {
 			case 13: //ENTREE
-				//TO-DO: application filtre
+				cout << endl << endl << "\t    ..." << endl;
+				appControleur.filtreSeuillage(parametre);
 				appControleur.modifierEcran(0);
 				fini = 1;
 				killer = 1;

@@ -116,6 +116,18 @@ void image::canny(int _niveau)
 	imageTravaillee = canny_result;
 }
 
+void image::seuillage(int _niveau)
+{
+	//Conversion niveau
+	int valeur_thresold = ((40 - (_niveau / 2))*(255 / 40));
+
+	//Travail
+	Mat& img = imageTravaillee;
+	Mat grayimage, truncated;
+	threshold(img, truncated, valeur_thresold, 255, 2);
+	imageTravaillee = truncated;
+}
+
 void image::sauvegarder(string _chemin)
 {
 	if (_chemin == "PAS_DE_FICHIER")

@@ -64,6 +64,11 @@ void Controleur::filtreCanny(int _niveau)
 	objetImage.canny(_niveau);
 }
 
+void Controleur::filtreSeuillage(int _niveau)
+{
+	objetImage.seuillage(_niveau);
+}
+
 void Controleur::imageTravail()
 {
 	objetImage.travail();
