@@ -1,4 +1,17 @@
 ﻿  image.cpp
 c:\users\nathan\documents\github\esirem_tp\image\image.cpp(37): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
 c:\users\nathan\documents\github\esirem_tp\image\image.cpp(48): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
+  application.cpp
+  controleur.cpp
+  main.cpp
+  vue_detectioncontours.cpp
+  vue_dilatation.cpp
+  vue_erosion.cpp
+  vue_gaussien.cpp
+  vue_gradient.cpp
+  vue_median.cpp
+  vue_menu.cpp
+  vue_segmentation.cpp
+  vue_seuillage.cpp
+  Génération de code en cours...
   Projet.vcxproj -> C:\Users\Nathan\Documents\GitHub\esirem_tp\Projet\x64\Debug\Projet.exe

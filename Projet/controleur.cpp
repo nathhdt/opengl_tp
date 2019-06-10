@@ -49,6 +49,11 @@ void Controleur::calculGradient(int _luminosite)
 	objetImage.gradient(_luminosite);
 }
 
+void Controleur::filtreDilatation(int _niveau)
+{
+	objetImage.dilatation(_niveau);
+}
+
 void Controleur::imageTravail()
 {
 	objetImage.travail();

@@ -59,16 +59,8 @@ void image::gradient(int _luminosite)
 	Mat& img = imageTravaillee;
 	Mat gradient, gray_img, gradientx, gradienty, final_gradientx, final_gradienty;
 
-	//Application du filtre
-	try
-	{
-		cvtColor(img, gray_img, cv::COLOR_BGR2GRAY);
-	}
-	catch (const string erreur)
-	{
-		//Ne rien faire
-	}
-	
+	//Travail
+	cvtColor(img, gray_img, cv::COLOR_BGR2GRAY);
 	Sobel(gray_img, gradientx, CV_16S, 1, 0, 3, 1, _luminosite);
 	convertScaleAbs(gradientx, final_gradientx);
 	Sobel(gray_img, gradienty, CV_16S, 0, 1, 3, 1, _luminosite);
@@ -77,6 +69,21 @@ void image::gradient(int _luminosite)
 	
 	//Application des modifications à l'image travaillée
 	imageTravaillee = gradient;
+}
+
+void image::dilatation(int _niveau)
+{
+	//Conversion niveau
+	_niveau = (_niveau / 3);
+	if ((_niveau % 2 == 0)) { _niveau++; }
+
+	//Travail
+	Mat& img = imageTravaillee;
+	Mat dilated;
+	int forme = MORPH_ELLIPSE;
+	Mat structure = getStructuringElement(forme, Size(_niveau, _niveau), Point(0, 0));
+	dilate(img, dilated, structure);
+	imageTravaillee = dilated;
 }
 
 void image::sauvegarder(string _chemin)
