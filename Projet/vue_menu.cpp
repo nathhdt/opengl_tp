@@ -8,7 +8,7 @@
 using namespace std;
 
 Vue_Menu::Vue_Menu(Controleur& _controleur)
-	: Vue("Traitement OpenCV (TP C++ ESIREM)"), appControleur(_controleur), menuSurbrillance(1)
+	: Vue("Traitement OpenCV (TP C++ ESIREM)"), appControleur(_controleur), menuSurbrillance(1), grayScaleApplique(0)
 {
 	appControleur.ajouterObservateur(this);
 }
@@ -90,7 +90,16 @@ void Vue_Menu::display()
 			}
 			else
 			{
-				cout << "\t\t4. Calcul du gradient dans une image (Sobel)" << endl << endl;
+				if (grayScaleApplique == 1)
+				{
+					SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 200);
+					cout << "\t\t4. Calcul du gradient dans une image (Sobel)" << endl << endl;
+					SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 199);
+				}
+				else
+				{
+					cout << "\t\t4. Calcul du gradient dans une image (Sobel)" << endl << endl;
+				}
 			}
 			cout << "\tOPERATIONS DE MORPHOLOGIE MATHEMATIQUE" << endl;
 			if (menuSurbrillance == 5)
@@ -122,7 +131,16 @@ void Vue_Menu::display()
 			}
 			else
 			{
-				cout << "\t\t7. Application d'un detecteur de contours (Canny)" << endl << endl;
+				if (grayScaleApplique == 1)
+				{
+					SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 200);
+					cout << "\t\t7. Application d'un detecteur de contours (Canny)" << endl << endl;
+					SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 199);
+				}
+				else
+				{
+					cout << "\t\t7. Application d'un detecteur de contours (Canny)" << endl << endl;
+				}
 			}
 			cout << "\tSEGMENTATIONS D'IMAGES" << endl;
 			if (menuSurbrillance == 8)
@@ -167,22 +185,15 @@ void Vue_Menu::display()
 			}
 
 			//Affichage image en cours
-
-
 			thread affichage(&Vue_Menu::afficherImage, this);
-
 			affichage.detach();
-
-
-
-
 
 			//Détection de l'appui de touches
 			while (killer == 0)
 			{
 				switch ((touche = _getch())) {
 				case 13:
-					if (menuSurbrillance != 11 && menuSurbrillance != 1 && menuSurbrillance != 10)
+					if (menuSurbrillance != 11 && menuSurbrillance != 1 && menuSurbrillance != 10 && menuSurbrillance != 4 && menuSurbrillance != 7)
 					{
 						appControleur.modifierEcran(menuSurbrillance);
 					}
@@ -194,6 +205,12 @@ void Vue_Menu::display()
 					{
 						appControleur.sauvegarderImage(selectionEnregistrement());
 					}
+					else if (menuSurbrillance == 4 || menuSurbrillance == 7)
+					{
+						grayScaleApplique = 1;
+						menuSurbrillance--;
+						appControleur.modifierEcran(menuSurbrillance + 1);
+					}
 					else
 					{
 						throw string("EXIT_APP");
@@ -201,14 +218,32 @@ void Vue_Menu::display()
 					killer = 1;
 					break;
 				case 72:
-					if (menuSurbrillance != 1)
+					//Evite de faire certains filtres qui buggent entre eux
+					if (menuSurbrillance == 8 && grayScaleApplique == 1)
+					{
+						menuSurbrillance = menuSurbrillance - 2;
+					}
+					else if (menuSurbrillance == 5 && grayScaleApplique == 1)
+					{
+						menuSurbrillance = menuSurbrillance - 2;
+					}
+					else if (menuSurbrillance != 1)
 					{
 						menuSurbrillance--;
 					}
 					killer = 1;
 					break;
 				case 80:
-					if (menuSurbrillance != 11)
+					//Evite de faire certains filtres qui buggent entre eux
+					if (menuSurbrillance == 6 && grayScaleApplique == 1)
+					{
+						menuSurbrillance = menuSurbrillance + 2;
+					}
+					else if (menuSurbrillance == 3 && grayScaleApplique == 1)
+					{
+						menuSurbrillance = menuSurbrillance + 2;
+					}
+					else if (menuSurbrillance != 11)
 					{
 						menuSurbrillance++;
 					}
@@ -216,7 +251,6 @@ void Vue_Menu::display()
 					break;
 				}
 			}
-			//affichage.join();
 		}
 		else //Si aucun fichier n'a été chargé, le menu est restreint
 		{
@@ -302,7 +336,7 @@ void Vue_Menu::display()
 	}
 }
 
-string Vue_Menu::selectionFichier() const
+string Vue_Menu::selectionFichier()
 {
 	//Déclare une structure OPENFILENAME
 	OPENFILENAME ouvertureFichier;
@@ -327,9 +361,14 @@ string Vue_Menu::selectionFichier() const
 	{
 		return "PAS_DE_FICHIER";
 	}
-	//Conversion du tableau avec le chemin d'accès en string
-	string chemin(cheminImage);
-	return chemin; //Retourne le chemin complet de l'image à charger
+	else
+	{
+		grayScaleApplique = 0;
+		//Conversion du tableau avec le chemin d'accès en string
+		string chemin(cheminImage);
+		return chemin; //Retourne le chemin complet de l'image à charger
+	}
+	
 }
 
 string Vue_Menu::selectionEnregistrement() const

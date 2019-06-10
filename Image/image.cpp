@@ -9,7 +9,7 @@ image::image()
 {
 }
 
-void image::charger(string _chemin)
+void image::charger(const string _chemin)
 {
 	if (_chemin == "PAS_DE_FICHIER")
 	{
@@ -29,9 +29,11 @@ void image::charger(string _chemin)
 			chemin = _chemin;
 		}
 	}
+	//On ferme toutes les fenêtres pour laisser place à la nouvelle image
+	destroyAllWindows();
 }
 
-void image::filtreMedian(int _intensite)
+void image::median(const int _intensite)
 {
 	//Conversion intensité
 	int niveau = (_intensite*2.5);
@@ -42,7 +44,7 @@ void image::filtreMedian(int _intensite)
 	medianBlur(img, imageTravaillee, niveau);
 }
 
-void image::filtreGaussien(int _intensite)
+void image::gaussien(const int _intensite)
 {
 	//Conversion intensité
 	int niveau = (_intensite*2.5);
@@ -53,7 +55,7 @@ void image::filtreGaussien(int _intensite)
 	GaussianBlur(img, imageTravaillee, Size(niveau, niveau), (0.0), 0);
 }
 
-void image::gradient(int _luminosite)
+void image::gradient(const int _luminosite)
 {
 	//Déclarations du filtre
 	Mat& img = imageTravaillee;
@@ -71,37 +73,37 @@ void image::gradient(int _luminosite)
 	imageTravaillee = gradient;
 }
 
-void image::dilatation(int _niveau)
+void image::dilatation(const int _niveau)
 {
 	//Conversion niveau
-	_niveau = (_niveau / 3);
-	if ((_niveau % 2 == 0)) { _niveau++; }
+	int convert = _niveau / 3;
+	if (convert % 2 == 0) { convert++; }
 
 	//Travail
 	Mat& img = imageTravaillee;
 	Mat dilated;
 	int forme = MORPH_ELLIPSE;
-	Mat structure = getStructuringElement(forme, Size(_niveau, _niveau), Point(0, 0));
+	Mat structure = getStructuringElement(forme, Size(convert, convert), Point(0, 0));
 	dilate(img, dilated, structure);
 	imageTravaillee = dilated;
 }
 
-void image::erosion(int _niveau)
+void image::erosion(const int _niveau)
 {
 	//Conversion niveau
-	_niveau = (_niveau / 3);
-	if ((_niveau % 2 == 0)) { _niveau++; }
+	int convert = _niveau / 3;
+	if (convert % 2 == 0) { convert++; }
 
 	//Travail
 	Mat& img = imageTravaillee;
 	Mat eroded;
 	int forme = MORPH_ELLIPSE;
-	Mat structure = getStructuringElement(forme, Size(_niveau, _niveau), Point(0, 0));
+	Mat structure = getStructuringElement(forme, Size(convert, convert), Point(0, 0));
 	erode(img, eroded, structure);
 	imageTravaillee = eroded;
 }
 
-void image::canny(int _niveau)
+void image::canny(const int _niveau)
 {
 	//Conversion niveau
 	int blurlevel = ((15 + (10 / _niveau)) - (_niveau / 4));
@@ -116,10 +118,10 @@ void image::canny(int _niveau)
 	imageTravaillee = canny_result;
 }
 
-void image::seuillage(int _niveau)
+void image::seuillage(const int _niveau)
 {
 	//Conversion niveau
-	int valeur_thresold = ((40 - (_niveau / 2))*(255 / 40));
+	int valeur_thresold = (40 - (_niveau / 2))*(255 / 40);
 
 	//Travail
 	Mat& img = imageTravaillee;
@@ -128,7 +130,7 @@ void image::seuillage(int _niveau)
 	imageTravaillee = truncated;
 }
 
-void image::segmentation(int _niveau)
+void image::segmentation(const int _niveau)
 {
 	//Setup du filtre
 	Mat growth;
@@ -149,12 +151,18 @@ void image::sauvegarder(string _chemin)
 	}
 	else
 	{
+		//Si y'a pas de point (pas d'extension), on rajoute PNG par défaut
+		if (_chemin.find(".") == std::string::npos) {
+
+			_chemin = _chemin + ".png";
+		}
+
 		//On écrit l'image travaillée
 		imwrite(_chemin, imageTravaillee);
 	}
 }
 
-string image::nom()
+string image::nom() const
 {
 	return chemin;
 }
@@ -188,6 +196,7 @@ void image::travail()
 	}
 	
 	//Impossible de faire un resize de la fenêtre par l'utilisateur sans Qt (fais chier)
+	//Impossible de modifier les boutons de contrôle de la fenêtre sans Qt (on peut la fermer...)
 	namedWindow(nomImage, WINDOW_AUTOSIZE);
 	imshow(nomImage, imageTravaillee);
 

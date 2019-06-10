@@ -11,11 +11,12 @@ class Vue_Menu : public Vue
 private:
 	Controleur& appControleur;
 	int menuSurbrillance;
+	int grayScaleApplique;
 public:
 	Vue_Menu(Controleur& _controleur);
 	virtual void notify();
 	virtual void display();
-	string selectionFichier() const;
+	string selectionFichier();
 	string selectionEnregistrement() const;
 	void afficherImage();
 };

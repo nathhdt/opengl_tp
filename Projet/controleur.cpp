@@ -24,52 +24,52 @@ int Controleur::ecranActuel() const
 	return ecran;
 }
 
-void Controleur::chargerImage(string _chemin)
+void Controleur::chargerImage(const string _chemin)
 {
 	objetImage.charger(_chemin);
 }
 
-void Controleur::sauvegarderImage(string _chemin)
+void Controleur::sauvegarderImage(const string _chemin)
 {
 	objetImage.sauvegarder(_chemin);
 }
 
-void Controleur::filtreMedian(int _intensite)
+void Controleur::filtreMedian(const int _intensite)
 {
-	objetImage.filtreMedian(_intensite);
+	objetImage.median(_intensite);
 }
 
-void Controleur::filtreGaussien(int _intensite)
+void Controleur::filtreGaussien(const int _intensite)
 {
-	objetImage.filtreGaussien(_intensite);
+	objetImage.gaussien(_intensite);
 }
 
-void Controleur::calculGradient(int _luminosite)
+void Controleur::calculGradient(const int _luminosite)
 {
 	objetImage.gradient(_luminosite);
 }
 
-void Controleur::filtreDilatation(int _niveau)
+void Controleur::filtreDilatation(const int _niveau)
 {
 	objetImage.dilatation(_niveau);
 }
 
-void Controleur::filtreErosion(int _niveau)
+void Controleur::filtreErosion(const int _niveau)
 {
 	objetImage.erosion(_niveau);
 }
 
-void Controleur::filtreCanny(int _niveau)
+void Controleur::filtreCanny(const int _niveau)
 {
 	objetImage.canny(_niveau);
 }
 
-void Controleur::filtreSeuillage(int _niveau)
+void Controleur::filtreSeuillage(const int _niveau)
 {
 	objetImage.seuillage(_niveau);
 }
 
-void Controleur::filtreSegmentation(int _niveau)
+void Controleur::filtreSegmentation(const int _niveau)
 {
 	objetImage.segmentation(_niveau);
 }

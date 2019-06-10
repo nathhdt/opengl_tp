@@ -12,17 +12,17 @@ private:
 	cv::Mat imageTravaillee;
 public:
 	image();
-	void charger(string _chemin);
-	void filtreMedian(int _intensite);
-	void filtreGaussien(int _intensite);
-	void gradient(int _luminosite);
-	void dilatation(int _niveau);
-	void erosion(int _niveau);
-	void canny(int _niveau);
-	void seuillage(int _niveau);
-	void segmentation(int _niveau);
+	void charger(const string _chemin);
+	void median(const int _intensite);
+	void gaussien(const int _intensite);
+	void gradient(const int _luminosite);
+	void dilatation(const int _niveau);
+	void erosion(const int _niveau);
+	void canny(const int _niveau);
+	void seuillage(const int _niveau);
+	void segmentation(const int _niveau);
 	void sauvegarder(string _chemin);
-	string nom();
+	string nom() const;
 	void travail();
 	~image();
 };
