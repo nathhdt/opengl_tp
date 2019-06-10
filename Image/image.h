@@ -20,6 +20,7 @@ public:
 	void erosion(int _niveau);
 	void canny(int _niveau);
 	void seuillage(int _niveau);
+	void segmentation(int _niveau);
 	void sauvegarder(string _chemin);
 	string nom();
 	void travail();

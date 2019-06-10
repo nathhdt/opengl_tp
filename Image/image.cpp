@@ -128,6 +128,19 @@ void image::seuillage(int _niveau)
 	imageTravaillee = truncated;
 }
 
+void image::segmentation(int _niveau)
+{
+	//Setup du filtre
+	Mat growth;
+	Point point(5, 5);
+
+	//Travail
+	Mat& img = imageTravaillee;
+	floodFill(img, cv::Point(10, 10), 255, (cv::Rect*)0, cv::Scalar(), 200);
+
+	imageTravaillee = img;
+}
+
 void image::sauvegarder(string _chemin)
 {
 	if (_chemin == "PAS_DE_FICHIER")

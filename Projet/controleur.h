@@ -23,6 +23,7 @@ public:
 	void filtreErosion(int _niveau);
 	void filtreCanny(int _niveau);
 	void filtreSeuillage(int _niveau);
+	void filtreSegmentation(int _niveau);
 	void imageTravail();
 	string nomFichier();
 };
