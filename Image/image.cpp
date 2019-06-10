@@ -53,6 +53,32 @@ void image::filtreGaussien(int _intensite)
 	GaussianBlur(img, imageTravaillee, Size(niveau, niveau), (0.0), 0);
 }
 
+void image::gradient(int _luminosite)
+{
+	//Déclarations du filtre
+	Mat& img = imageTravaillee;
+	Mat gradient, gray_img, gradientx, gradienty, final_gradientx, final_gradienty;
+
+	//Application du filtre
+	try
+	{
+		cvtColor(img, gray_img, cv::COLOR_BGR2GRAY);
+	}
+	catch (const string erreur)
+	{
+		//Ne rien faire
+	}
+	
+	Sobel(gray_img, gradientx, CV_16S, 1, 0, 3, 1, _luminosite);
+	convertScaleAbs(gradientx, final_gradientx);
+	Sobel(gray_img, gradienty, CV_16S, 0, 1, 3, 1, _luminosite);
+	convertScaleAbs(gradienty, final_gradienty);
+	addWeighted(final_gradientx, 0.5, final_gradienty, 0.5, 0, gradient);
+	
+	//Application des modifications à l'image travaillée
+	imageTravaillee = gradient;
+}
+
 void image::sauvegarder(string _chemin)
 {
 	if (_chemin == "PAS_DE_FICHIER")

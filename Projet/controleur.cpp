@@ -44,6 +44,11 @@ void Controleur::filtreGaussien(int _intensite)
 	objetImage.filtreGaussien(_intensite);
 }
 
+void Controleur::calculGradient(int _luminosite)
+{
+	objetImage.gradient(_luminosite);
+}
+
 void Controleur::imageTravail()
 {
 	objetImage.travail();

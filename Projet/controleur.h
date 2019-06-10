@@ -18,6 +18,7 @@ public:
 	void sauvegarderImage(string _chemin);
 	void filtreMedian(int _intensite);
 	void filtreGaussien(int _intensite);
+	void calculGradient(int _luminosite);
 	void imageTravail();
 	string nomFichier();
 };

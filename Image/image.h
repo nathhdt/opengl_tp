@@ -15,6 +15,7 @@ public:
 	void charger(string _chemin);
 	void filtreMedian(int _intensite);
 	void filtreGaussien(int _intensite);
+	void gradient(int _luminosite);
 	void sauvegarder(string _chemin);
 	string nom();
 	void travail();
