@@ -132,15 +132,68 @@ void image::seuillage(const int _niveau)
 
 void image::segmentation(const int _niveau)
 {
-	//Setup du filtre
-	Mat growth;
-	Point point(5, 5);
+	//Dépendances du filtre
+	Mat noise;
+	Mat edges;
+	Mat threshold1;
+	Mat distance;
+	Mat distance_8bits;
+	Mat segmented;
 
-	//Travail
+	//PROCEDE
 	Mat& img = imageTravaillee;
-	floodFill(img, cv::Point(10, 10), 255, (cv::Rect*)0, cv::Scalar(), 200);
+	//On applque un kernel qui représente une dérivée, ça nous montre le "bruit" de l'image
+	Mat noyau = (Mat_<float>(3, 3) <<
+		1, 1, 1,
+		1, -8, 1,
+		1, 1, 1);
+	//Convolution du kernel et de l'image
+	filter2D(img, noise, CV_32F, noyau);
+	//Détection des bords les plus marqués
+	img.convertTo(edges, CV_32F);
+	//On crée une image avec de très forts bords et peu de bruit, pour la traiter plus tard
+	Mat imgResult = edges - noise;
+	//On redonne à l'image sa couleur
+	imgResult.convertTo(imgResult, CV_8UC3);
+	//Les lignes suivantes: on crée des marqueurs pour segmenter l'image avec watershed() (plus tard)
+	//On remet la couleur à l'image aux bords marqués
+	edges.convertTo(edges, CV_8UC3);
+	//On met l'image en gris pour le "distance processing"
+	cvtColor(imgResult, threshold1, COLOR_BGR2GRAY);
+	//Opération de seuillage pour réduire le bruit
+	threshold(threshold1, threshold1, (200 / (_niveau + 1)), 255, THRESH_BINARY | THRESH_OTSU);
+	//Calcul de la distance pour chaque pixel par rapport au bord le plus proche
+	distanceTransform(threshold1, distance, DIST_L2, 3);
+	//normalize() donne à l'image un encodage qu'on peut visualiser au lieu d'une matrice remplie de nombres
+	normalize(distance, distance, 0, 1.0, NORM_MINMAX);
+	//Usage de thresold() pour obtenir nos marqueurs correspondant aux valeurs maximales
+	threshold(distance, distance, 0.4, 1.0, THRESH_BINARY);
+	//Dilatation de l'image pour un résultat plus "smooth"
+	Mat kernel1 = Mat::ones(3, 3, CV_8U);
+	dilate(distance, distance, kernel1);
+	//Conversion en 8 bits
+	distance.convertTo(distance_8bits, CV_8U);
+	//Usage de fndConturs() pour déterminer où segmenter l'image
+	vector<vector<Point> > contours;
+	findContours(distance_8bits, contours, RETR_EXTERNAL, CHAIN_APPROX_SIMPLE);
+	//On crée une nouvelle image où l'on placera les marqueurs (encodage 32S pour application mathématique)
+	Mat markers = Mat::zeros(distance.size(), CV_32S);
+	//On dessine les marqueurs du premier plan
+	for (size_t i = 0; i < contours.size(); i++)
+	{
+		drawContours(markers, contours, static_cast<int>(i), Scalar(static_cast<int>(i) + 1), -1);
+	}
+	//On dessine les marqueurs de l'arrière-plan
+	circle(markers, Point(5, 5), 3, Scalar(255), -1);
+	//On applique le watershed()
+	watershed(imgResult, markers);
+	//Reconversion de l'image pour visualisation
+	markers.convertTo(segmented, CV_8U);
+	//On inverse tous les pixels (leurs valeurs) de l'image
+	bitwise_not(segmented, segmented);
 
-	imageTravaillee = img;
+	//"segmented" est le résultat du procédé entier (seul paramètre modifiable ici sera le thresold, seuillage)
+	imageTravaillee = segmented;
 }
 
 void image::sauvegarder(string _chemin)
