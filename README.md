@@ -1,5 +1,5 @@
-# TP C++
-GitHub du projet de TP C++ (1A IT)
+# esirem_tp
 
+Projet C++ ESIREM 1A IT (semestre 2)
 
-COLLARD Alexandre & HAUDOT Nathan
+COLLARD Alexandre, HAUDOT Nathan
